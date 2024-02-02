@@ -22,6 +22,7 @@
     <script>
 
        
+        let abindex =-1;
         function saveInfo()
         {
         
@@ -32,11 +33,20 @@
                 lastName : document.getElementById("lastName").value
             }
 
+            if(abindex <0)
+            {
             items.push(obj);
+            }
+            else
+            {
+                items[abindex] =obj;
+
+            }
 
 
             localStorage.setItem("user",JSON.stringify(items));
 
+            abindex =-1;
             display();
 
         }
@@ -50,7 +60,7 @@
                 return (`<tr><td>${v.firstName}</td><td>${v.lastName}</td>
                     
                         <td><button onclick=removeItem(${index})>Delete</button></td>
-                        <td><button>Edit</button></td>
+                        <td><button onclick=editItem(${index})>Edit</button></td>
                     </tr>`)
             });
 
@@ -66,13 +76,19 @@
 
             localStorage.setItem("user",JSON.stringify(items));
 
-display();
+            display();
         }
-       
-       
+        
         function editItem(index)
         {
+            let items = JSON.parse(localStorage.getItem("user")) || [];
+
+            document.getElementById("firstName").value = items[index].firstName;
+            document.getElementById("lastName").value = items[index].lastName;
+
+            abindex=index;
         }
+       
         display();
 
     </script>
