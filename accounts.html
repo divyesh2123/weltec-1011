@@ -6,7 +6,22 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="display"></div>
     
-    <h1>accounts</h1>
+    <script>
+
+        const  token =  JSON.parse(localStorage.getItem("token"));
+        fetch("https://real-pear-fly-kilt.cyclic.app/accounts",{
+            headers : {
+                'Authorization' :"Bearer " + token.jwtToken
+            }
+        }).then(y=>y.json()).then(y=>{
+
+            console.log(y);
+        })
+
+
+    </script>
+   
 </body>
 </html>
