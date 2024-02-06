@@ -11,6 +11,11 @@
     <input type="text" id="lastName" />
     <button onclick="saveInfo()">SaveInformation</button>
 
+    <input type="text" id="searchTerm" />
+
+    <input type="submit" value="search"  onclick="searchInfo()"/>
+    
+    <input type="button" value="clear"  onclick="clearInfo()"/>
     <table>
 
         <tbody id="display">
@@ -21,7 +26,13 @@
     </table>
     <script>
 
-       
+        function clearInfo()
+        {
+            document.getElementById("searchTerm").value = "";
+            display();
+        }
+
+
         let abindex =-1;
         function saveInfo()
         {
@@ -55,16 +66,21 @@
         {
             let items = JSON.parse(localStorage.getItem("user")) || [];
 
+            displayonlyHtml(items);
+        }
+
+        function displayonlyHtml(items)
+        {
             let p = items.map(function(v,index) {
 
-                return (`<tr><td>${v.firstName}</td><td>${v.lastName}</td>
-                    
-                        <td><button onclick=removeItem(${index})>Delete</button></td>
-                        <td><button onclick=editItem(${index})>Edit</button></td>
-                    </tr>`)
-            });
+return (`<tr><td>${v.firstName}</td><td>${v.lastName}</td>
+    
+        <td><button onclick=removeItem(${index})>Delete</button></td>
+        <td><button onclick=editItem(${index})>Edit</button></td>
+    </tr>`)
+});
 
-            document.getElementById("display").innerHTML = p.join(" ");
+document.getElementById("display").innerHTML = p.join(" ");
         }
 
         function removeItem(index)
@@ -89,6 +105,22 @@
             abindex=index;
         }
        
+        function searchInfo()
+        {
+            let p = document.getElementById("searchTerm").value;
+
+            let items = JSON.parse(localStorage.getItem("user")) || [];
+
+
+            let filteritems = items.filter(function(value){
+
+                return value.firstName.includes(p) == true ;
+            })
+
+            displayonlyHtml(filteritems)
+
+
+        }
         display();
 
     </script>
