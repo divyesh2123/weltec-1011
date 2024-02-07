@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+class Fetch {
+  async fetchData(path) {
+    const res = await fetch(path)
+
+    const {
+      status
+    } = res;
+
+    if (status < 200 || status >= 300) {
+      return console.log("Oh-Oh! Seite konnte nicht gefunden werden: " + status)
+    }
+
+    this.data = await res.text();
+  }
+}
+
+class Day08 extends Fetch {
+  constructor(path) {
+    super(path)
+    this.path = path;
+  }
+
+  async init() {
+    await this.fetchData(this.path);
+  }
+
+  doSomething() {
+    console.log('Something', this.data)
+  }
+
+  doSomethingElse() {
+    console.log('Else ', this.data)
+  }
+}
+
+const day = new Day08('https://jsonplaceholder.typicode.com/todos/1')
+
+day.init().then(() => {
+  day.doSomething();
+  day.doSomethingElse();
+})
+
+
+    </script>
+    
+</body>
+</html>

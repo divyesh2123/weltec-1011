@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="test" name="save">Save</button>
+
+    <div id="display"></div>
+  
+  <script src="script1.js"></script>
+  <script src="script2.js"></script>
+  <script>
+    class  Dispplay
+    {
+        constructor(name)
+        {
+            this.name=name;
+            
+        }
+     
+
+        dis()
+        {
+           
+
+        }
+
+        disarro =()=>{
+
+            document.getElementById("display").innerHTML = this.name;
+
+        }
+    }
+
+
+
+    let p = new Dispplay("Ddd");
+
+    document.getElementById("test").addEventListener("click",p.disarro)
+
+  </script>
+</body>
+</html>

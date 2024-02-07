@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+            class APICall 
+            {
+
+                constructor(path)
+                {
+                    this.path = path;
+                }
+
+                fetchData()
+                {
+                      return  fetch(this.path).then(y=> y.json());
+                }
+
+                displayData(data)
+                {
+
+                    console.log(data);
+
+                }
+
+            }
+
+            let p = new APICall("https://jsonplaceholder.typicode.com/comments")
+
+                p.fetchData().then(y=>{
+
+                    p.displayData(y)
+                })
+
+
+                let p1 = new APICall("https://jsonplaceholder.typicode.com/users")
+
+p1.fetchData().then(y=>{
+
+    p.displayData(y)
+})
+    </script>
+    
+</body>
+</html>
